@@ -1,15 +1,103 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>RailsEventApp</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<!doctype html>
+<html lang="en">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cerulean/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-C++cugH8+Uf86JbNOnQoBweHHAe/wVKN/mb0lTybu/NZ9sEYbd+BbbYtNpWYAsNP" crossorigin="anonymous">
+  <title>RailsEventApp</title>
+ 
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Rails Event App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navBarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <% if logged_in? %>
+        <li class="nav-item active">
+          <a class="nav-link" href="/events">Upcoming Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/events/new">Create Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/sessions/destroy">Log Out</a>
+        </li>
+
+
+        <li class="nav-item dropdown">
+          <div class="btn-group">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Dropdown link
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="/events">Upcoming Events</a>
+              <a class="dropdown-item" href="/events/new">Create Events</a>
+              <% @user = current_user %>
+              <a class="dropdown-item" href="/users/<%= @user.id %>">Your Events</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/rsvp_events">Events You Rsvp</a>
+              <a class="dropdown-item" href="/sessions/destroy">Log Out</a>
+            </div>
+          </div>
+        </li>
+
+        <% end %>
+        <% if !logged_in? %>
+        <li class="nav-item">
+          <a class="nav-link" href="/sessions/new">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/new">Sign Up</a>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </nav>
+  <div id="flash"></div>
+    <%- flash.keys.each do |kind| %>
+    <div class=<%= kind %>>
+      <%= flash[kind] %>
+    </div>
+    <%- end %>
+  </div>
+
+
+  
+  <%= yield %>
+
+
+  <nav class="navbar fixed-bottom navbar-light bg-light">
+    <a class="navbar-brand" href="#">&copy; 2019<logo> RailsEventApp</logo></a>
+  </nav>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+  </script>
+</body>
+
 </html>
