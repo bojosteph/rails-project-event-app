@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'sessions/new'
+  get 'sessions/destroy'
+  post 'sessions/create'
   #get 'users/new'
   #get 'users/edit'
   #get 'events/new'
@@ -9,5 +11,5 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :events
   resources :users
-  root :to => 'home#index'
+  root :to => 'public#index'
 end
