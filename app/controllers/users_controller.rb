@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  def index 
+    before_action :confirm_logged_in, :except => [:new, :create]
+
+    def index 
         @user = User.all
     end
 
@@ -23,7 +25,7 @@ class UsersController < ApplicationController
     end
 
     def edit
-      @user = User.find(params[:id])
+        @user = User.find(params[:id])
     end
 
     def update

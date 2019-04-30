@@ -1,20 +1,23 @@
 class EventsController < ApplicationController
-  def index
+    before_action :confirm_logged_in
+
+
+    def index
         @events = Event.all
     end
-
        
     def show 
         @event = Event.find(params[:id])
     end
 
-    def new 
+    def new
+        @user = current_user 
         @event = Event.new 
     end
 
     def create 
-        #@user = current_user
-        @event = Event.new(event_params(:name, :location, :description, :planner_id, :start_date, :end_date))
+        @user = current_user
+        @event = @user.events.build(event_params(:name, :location, :description, :planner_id, :start_date, :end_date))
 
         if @event.save
             redirect_to event_path(@event)
@@ -23,7 +26,8 @@ class EventsController < ApplicationController
         end
     end
 
-    def edit 
+    def edit
+        @user = current_user
         @event = Event.find(params[:id])
     end
 
@@ -46,8 +50,7 @@ class EventsController < ApplicationController
     def event_params(*args)
         params.require(:event).permit(*args)
     end
-
-    
+   
 
 end
 

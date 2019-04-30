@@ -1,23 +1,27 @@
-<%= form_for @event do |f|%>
+<% if @event.errors.any? %>
+    <h4 style="color:#FF5500"><%= @event.errors.full_messages.to_sentence %></h4>
+<% end %>
+
+<%= form_for(@event) do |f|%>
 <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
 </div>
 <div class="form-group">
     <%= f.label :start_date %>
-    <%= f.datetime_field :start_date %>
+    <%= f.datetime_select :start_date, class: 'form-control' %>
 </div>
 <div class="form-group">
     <%= f.label :end_date %>
-    <%= f.datetime_field :end_date %>
+    <%= f.datetime_select :end_date, class: 'form-control' %>
 </div>
 <div class="form-group">
     <%= f.label :location %>
-    <%= f.text_field :location %>
+    <%= f.text_field :location, class: 'form-control' %>
 </div>
 <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.text_area  :description,  class: 'form-control'%>
 </div>
 
 <%= f.submit %>
