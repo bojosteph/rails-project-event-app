@@ -7,6 +7,7 @@ class EventsController < ApplicationController
     end
        
     def show 
+        @user = current_user
         @event = Event.find(params[:id])
     end
 
@@ -27,6 +28,7 @@ class EventsController < ApplicationController
     end
 
     def edit
+        #raise params.inspect
         @user = current_user
         @event = Event.find(params[:id])
     end
@@ -41,6 +43,7 @@ class EventsController < ApplicationController
     end
 
     def destroy
+        #raise params.inspect
         Event.find(params[:id]).delete
         redirect_to events_path
     end

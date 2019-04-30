@@ -1,10 +1,41 @@
-<h1>Events</h1>
+<<div class="container">
+  <h1 class="display-2" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;">All Upcoming
+    Events</h1>
+  
 
-<%= link_to "New Event", new_event_path %>
+  <div class="row">
 
-<ul>
-<%- @events.each do |event| %>
-  <%- description = "#{event.name} from #{event.start_date} to #{event.end_date}" %>
-  <li><%= description %> - <%= link_to "Edit", edit_event_path(event) %></li>
-<%- end %>
-</ul>
+    <% @events.each do |event| %>
+
+    <div class="col-sm" style="padding-bottom: 10px;">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+
+          <h5 class="card-title">
+            <%= event.name %>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <%= event.start_date %>
+          </h6>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <%= event.end_date %>
+          </h6>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <%= event.location %>
+          </h6>
+          <p class="card-text">
+            <%= event.description.truncate(25, separator: /\s/) %>
+          </p>
+          <a href="/events/<%= event.id %>" class="card-link">Event Details</a>
+
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <br />
+
+    <% end %>
+
+  </div>
+</div>

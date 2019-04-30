@@ -1,28 +1,50 @@
-<h2 >
+<div class="container">
+  <h2 style="padding-top: 12px; padding-bottom: 12px;">
+   
+    <%= @event.name %>
+  </h2>
+  <br />
 
-        <%= @event.name %>
-    </h2>
-    <br />
+  <h4>Date:
+    <%= @event.start_date %>
+  </h4>
+  <h4>Location:
+    <%= @event.location %>
+  </h4>
+  <br />
+  <hr />
+  <br />
+  <p>
+    <h5>Description:
+      <%= @event.description %>
+    </h5>
+  </p>
+  <br />
+  <a class="btn btn-outline-primary btn-lg btn-block" href="/events">All Upcoming Events</a>
+  <br />
+  <% if @event.planner_id == current_user.id %>
+  <a class="btn btn-outline-info btn-lg btn-block" href= "<%= edit_event_path(@event) %>">Edit Event</a>
+  <br />
+  <a class="btn btn-outline-info btn-lg btn-block" events_path>Your Events</a>
+  <br />
 
-    <h4>
-        <%=  @event.start_date %>
-    </h4>
-    <h4>
-        <%= @event.end_date %>
-    </h4>
+  <a class="btn btn-outline-info btn-lg btn-block" href="/user_rsvp_events/<%= @event.id %>">Event Participants</a>
+  <br />
 
-    <h4>Location:
-        <%= @event.location %>
-    </h4>
-    <br />
-    <hr />
-    <br />
-    <p>
-        <h5>Description:
-            <%= @event.description %>
-        </h5>
-    </p>
-  
+  <a class="btn btn-outline-info btn-lg btn-block" href= "<%= events_delete_path(id: @event.id) %>">Delete Event</a>
+  <% end %>
+  <br />
+  <br />
+  <% if @event.planner_id != current_user.id %>
+  <form action="/rsvp_events" method="POST">
+    <div class="form-group">
+      <input type="hidden" class="form-control" id="event_id" name="event_id" value=<%=@event.id %> >
+    </div>
+    <div class="form-group">
+      <input type="hidden" class="form-control" id="user_id" name="user_id" value=<%=current_user.id %>>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up to this events</button>
+  </form>
 
-     
-            <div class="rsvp"><%= link_to "Edit Event", edit_event_path(@event) %></div>
+  <% end %>
+</div>
