@@ -1,0 +1,2 @@
+module RsvpEventsHelper
+end

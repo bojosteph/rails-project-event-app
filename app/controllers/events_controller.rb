@@ -9,6 +9,8 @@ class EventsController < ApplicationController
     def show 
         @user = current_user
         @event = Event.find(params[:id])
+        @rsvp_events = RsvpEvent.where(participant_id: @user)
+
     end
 
     def new

@@ -19,6 +19,18 @@
       <%= @event.description %>
     </h5>
   </p>
+  <% @rsvp_events.each do |rsvp| %>
+
+  <ul>
+    <li>
+      <%= rsvp.participant.name %>
+    </li>
+    <li> email :
+      <%= rsvp.participant.email %>
+    </li>
+  </ul>
+
+  <% end %>
   <br />
   <a class="btn btn-outline-primary btn-lg btn-block" href="/events">All Upcoming Events</a>
   <br />
@@ -36,15 +48,9 @@
   <br />
   <br />
   <% if @event.planner_id != current_user.id %>
-  <form action="/rsvp_events" method="POST">
-    <div class="form-group">
-      <input type="hidden" class="form-control" id="event_id" name="event_id" value=<%=@event.id %> >
-    </div>
-    <div class="form-group">
-      <input type="hidden" class="form-control" id="user_id" name="user_id" value=<%=current_user.id %>>
-    </div>
-    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up to this events</button>
-  </form>
-
+  <div class="rsvp"><%= button_to "Rsvp now", rsvp_events_create_event_path(event_id: @event.id), class: "btn btn-primary" %>
+  </div>
+  <a class="btn btn-primary" href="<%= rsvp_events_delete_path(id: @event.id) %>">Cancel Rsvp</a>
+  <br />
   <% end %>
 </div>
