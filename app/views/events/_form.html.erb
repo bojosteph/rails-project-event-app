@@ -1,5 +1,5 @@
 <% if @event.errors.any? %>
-    <h4 style="color:#FF5500"><%= @event.errors.full_messages.to_sentence %></h4>
+<h4 style="color:#FF5500"><%= @event.errors.full_messages.to_sentence %></h4>
 <% end %>
 
 <%= form_for(@event) do |f|%>

@@ -3,8 +3,6 @@
 class EventsController < ApplicationController
   before_action :confirm_logged_in
   before_action :set_time_zone, if: :logged_in?
-  
-
 
   def index
     @events = Event.all
@@ -13,7 +11,7 @@ class EventsController < ApplicationController
   def show
     @user = current_user
     @event = Event.find(params[:id])
-    @rsvp_events = RsvpEvent.where(participant_id: @user)
+    @rsvp_events = RsvpEvent.where(attending_event_id: @event.id)
   end
 
   def new
@@ -76,8 +74,6 @@ end
   def set_time_zone
     Time.zone = 'Central Time (US & Canada)'
   end
-
-  
 
   def google_secret
     Google::APIClient::ClientSecrets.new(

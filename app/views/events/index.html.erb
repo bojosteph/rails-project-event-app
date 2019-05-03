@@ -40,15 +40,14 @@
     <br />
     <div id="events">
       <%= month_calendar events: @events do |date, events| %>
-        <%= date %>
+      <%= date %>
 
-        <% events.each do |event| %>
+      <% events.each do |event| %>
         <div>
           <%= event.name %>
         </div>
-        <% end %>
+      <% end %>
       <% end %>
     </div>
   </div>
-  </div>
-  
+</div>
