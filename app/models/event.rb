@@ -2,7 +2,9 @@ class Event < ApplicationRecord
     belongs_to :planner, :class_name => "User", :foreign_key => 'planner_id'
     validates_presence_of :name, :location, :description, :start_date, :end_date
     has_many :rsvp_events, foreign_key: :attending_event_id
-    has_many :participants, through: :rsvp_events, source: :user 
+    has_many :participants, through: :rsvp_events, source: :user
+     alias_attribute :start_time, :start_date
+     alias_attribute :end_time, :end_date
 
 
 

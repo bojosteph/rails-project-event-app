@@ -1,7 +1,10 @@
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
   helper_method :current_user, :logged_in?
+  
+  
 
   def current_user
     if session[:user_id]
@@ -15,17 +18,14 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-
-  private 
+  private
 
   def confirm_logged_in
     unless logged_in?
-      flash[:notice] = "Please log in."
+      flash[:notice] = 'Please log in.'
       redirect_to(sessions_new_path)
     end
   end
-  
+
+   
 end
-
-
-

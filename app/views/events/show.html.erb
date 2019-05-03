@@ -1,12 +1,16 @@
 <div class="container">
   <h2 style="padding-top: 12px; padding-bottom: 12px;">
+  <div id="calendar"></div>
    
     <%= @event.name %>
   </h2>
   <br />
 
-  <h4>Date:
-    <%= @event.start_date %>
+  <h4>
+    <%= start_of_event(@event) %>
+  </h4>
+  <h4>
+    <%= end_of_event(@event) %>
   </h4>
   <h4>Location:
     <%= @event.location %>
@@ -54,3 +58,4 @@
   <br />
   <% end %>
 </div>
+
