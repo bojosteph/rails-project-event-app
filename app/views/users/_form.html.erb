@@ -1,3 +1,6 @@
+<% if @user.errors.any? %>
+    <h4 style="color:#FF5500"><%= @user.errors.full_messages.to_sentence %></h4>
+<% end %>
 
 
 <div class="form-group">

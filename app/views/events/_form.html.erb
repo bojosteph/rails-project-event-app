@@ -2,7 +2,8 @@
 <h4 style="color:#FF5500"><%= @event.errors.full_messages.to_sentence %></h4>
 <% end %>
 
-<%= form_for(@event) do |f|%>
+<%= form_for [@user, @event] do |f|%>
+    
 <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>

@@ -29,11 +29,13 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <% if logged_in? %>
+          <% user_id = current_user.id %>
         <li class="nav-item active">
-          <a class="nav-link" href="/events">Upcoming Events</a>
+          <a class="nav-link" href="<%= user_events_path(user_id) %>">Upcoming Events</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/events/new">Create Events</a>
+            
+          <a class="nav-link" href="/users/user_id/events/new">Create Events</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/sessions/destroy">Log Out</a>
@@ -48,8 +50,8 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="/events">Upcoming Events</a>
-              <a class="dropdown-item" href="/events/new">Create Events</a>
+              <a class="dropdown-item" href="<%= user_events_path(user_id) %>">Upcoming Events</a>
+              <a class="dropdown-item" href="<%= new_user_event_path(user_id) %>">Create Events</a>
               <% @user = current_user %>
               <a class="dropdown-item" href="/users/<%= @user.id %>">Your Events</a>
               <div class="dropdown-divider"></div>
