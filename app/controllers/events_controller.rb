@@ -18,11 +18,13 @@ class EventsController < ApplicationController
   def new
     @user = current_user
     @event = Event.new
+    @event.build_category
   end
 
   def create
+    #raise params.inspect
     @user = current_user
-    @event = @user.events.build(event_params(:name, :location, :description, :planner_id, :start_date, :end_date))
+    @event = @user.events.build(event_params(:name, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
 
     if @event.save
       redirect_to user_event_path(@user, @event)
@@ -40,7 +42,7 @@ class EventsController < ApplicationController
   def update
     @user = current_user
     @event = Event.find(params[:id])
-    if @event.update(event_params(:name, :date, :location, :description, :planner_id, :start_date, :end_date))
+    if @event.update(event_params(:name, :date, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
       redirect_to user_event_path(@user, @event)
     else
       render :edit

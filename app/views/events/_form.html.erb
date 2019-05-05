@@ -1,29 +1,37 @@
 <% if @event.errors.any? %>
-<h4 style="color:#FF5500"><%= @event.errors.full_messages.to_sentence %></h4>
+    <h4 style="color:#FF5500"><%= @event.errors.full_messages.to_sentence %></h4>
 <% end %>
 
 <%= form_for [@user, @event] do |f|%>
-    
-<div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control' %>
-</div>
-<div class="form-group">
-    <%= f.label :start_date %>
-    <%= f.datetime_select :start_date, class: 'form-control' %>
-</div>
-<div class="form-group">
-    <%= f.label :end_date %>
-    <%= f.datetime_select :end_date, class: 'form-control' %>
-</div>
-<div class="form-group">
-    <%= f.label :location %>
-    <%= f.text_field :location, class: 'form-control' %>
-</div>
-<div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_area  :description,  class: 'form-control'%>
-</div>
+    <%= f.hidden_field :planner_id %>
 
-<%= f.submit %>
+    <div class="form-group">
+        <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "Pick a Category"%>
+        <%= f.fields_for :category do |builder| %>
+        <p>-or-</p><%= builder.text_field :name, value: nil, placeholder:"New Gategory"%><br><br>
+        <% end %>
+    </div>
+        
+    <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= f.label :start_date %>
+        <%= f.datetime_select :start_date, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= f.label :end_date %>
+        <%= f.datetime_select :end_date, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= f.label :location %>
+        <%= f.text_field :location, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area  :description,  class: 'form-control'%>
+    </div>
+
+    <%= f.submit %>
 <% end %>

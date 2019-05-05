@@ -2,6 +2,7 @@
 
 class Event < ApplicationRecord
   belongs_to :planner, class_name: 'User', foreign_key: 'planner_id'
+  belongs_to :category
   validates_presence_of :name, :location, :description, :start_date, :end_date
   has_many :rsvp_events, foreign_key: :attending_event_id, dependent: :destroy
   has_many :participants, through: :rsvp_events, source: :user
@@ -54,4 +55,12 @@ class Event < ApplicationRecord
       errors.add(:end_date, 'must be on or after start of event')
     end
   end
+
+  def category_attributes=(category_attributes)
+    if !category_attributes[:name].blank?
+      self.build_category(category_attributes)
+    end
+  end
+
 end
+
