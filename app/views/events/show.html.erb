@@ -1,7 +1,6 @@
 <div class="container">
   <h2 style="padding-top: 12px; padding-bottom: 12px;">
-    <div id="calendar"></div>
-
+    
     <%= @event.name %>
   </h2>
   <br />
@@ -38,10 +37,10 @@
   <br />
     <a class="btn btn-outline-primary btn-lg btn-block" href="<%=user_events_url %>">All Upcoming Events</a>
   <br />
-    <% if @event.planner_id == current_user.id %>
+    <% if @event.planner_id == @user.id %>
     <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_user_event_path(@event) %>">Edit Event</a>
   <br />
-    <a class="btn btn-outline-info btn-lg btn-block" events_path>Your Events</a>
+    <a class="btn btn-outline-info btn-lg btn-block" href="/users/<%= @user.id %>">Your Events</a>
   <br />
 
     <a class="btn btn-outline-info btn-lg btn-block" href="<%= events_delete_path(id: @event.id) %>">Delete Event</a>

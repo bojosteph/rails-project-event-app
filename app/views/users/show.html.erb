@@ -1,0 +1,27 @@
+<div class="container">
+  <h2 style="padding-top: 12px; padding-bottom: 12px;">
+
+    
+
+      <h3>User Events</h3>
+    <ul>
+      <% @event.each do |event| %>
+      <li>
+        <h4><%= link_to event.name, user_event_path(@user, event) %></h4>
+      </li>
+      <% end %>
+    </ul>
+</div>
+
+
+<div id="events">
+  <%= month_calendar events: @event do |date, events| %>
+  <%= date %>
+
+  <% events.each do |event| %>
+  <div>
+    <%= event.name %>
+  </div>
+  <% end %>
+  <% end %>
+</div>

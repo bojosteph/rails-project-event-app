@@ -29,39 +29,24 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <% if logged_in? %>
-          <% user_id = current_user.id %>
+
         <li class="nav-item active">
-          <a class="nav-link" href="<%= user_events_path(user_id) %>">Upcoming Events</a>
+          <% @user = current_user %>
+          <a class="nav-link" href="<%= user_events_path(@user) %>">Upcoming Events</a>
         </li>
         <li class="nav-item">
-            
-          <a class="nav-link" href="/users/user_id/events/new">Create Events</a>
+
+          <a class="nav-link" href="/users/<%= @user.id %>">Your Events</a>
+        </li>
+        <li class="nav-item">
+
+          <a class="nav-link" href="<%= new_user_event_path(@user)%>">Create Events</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/sessions/destroy">Log Out</a>
         </li>
 
-
-        <li class="nav-item dropdown">
-          <div class="btn-group">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Dropdown link
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="<%= user_events_path(user_id) %>">Upcoming Events</a>
-              <a class="dropdown-item" href="<%= new_user_event_path(user_id) %>">Create Events</a>
-              <% @user = current_user %>
-              <a class="dropdown-item" href="/users/<%= @user.id %>">Your Events</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/rsvp_events">Events You Rsvp</a>
-              <a class="dropdown-item" href="/sessions/destroy">Log Out</a>
-            </div>
-          </div>
-        </li>
-
-        <% end %>
+          <% end %>
         <% if !logged_in? %>
         <li class="nav-item">
           <a class="nav-link" href="/sessions/new">Log In</a>
@@ -75,15 +60,15 @@
 
   </nav>
   <div id="flash"></div>
-    <%- flash.keys.each do |kind| %>
-    <div class=<%= kind %>>
-      <%= flash[kind] %>
-    </div>
-    <%- end %>
+  <%- flash.keys.each do |kind| %>
+  <div class=<%= kind %>>
+    <%= flash[kind] %>
+  </div>
+  <%- end %>
   </div>
 
 
-  
+
   <%= yield %>
 
 
