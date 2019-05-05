@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
   get 'sessions/destroy'
   post 'sessions/create'
-  
+  get 'events/delete' => 'events#destroy'
   get 'rsvp_events/delete' => 'rsvp_events#destroy'
   get '/auth/:provider/callback' => "sessions#create"
   get 'auth/google/callback', to: 'sessions#googleAuth'
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :events, only: [:show, :index, :new, :edit, :create, :update]
   end 
 
-  resources :events, only: [:destroy] do
+  resources :events do
      post '/rsvp_events/create', to: 'rsvp_events#create', on: :member
   end
     
