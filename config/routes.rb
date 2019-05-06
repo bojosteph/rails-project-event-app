@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'sessions/new'
   get 'sessions/destroy'
   post 'sessions/create'
@@ -8,6 +9,8 @@ Rails.application.routes.draw do
   #get 'auth/google/callback', to: 'sessions#googleAuth'
   get '/auth/failure' => 'public#index'
   #post '/rsvp_events/create', to: 'rsvp_events#create'
+
+  
 
   #get 'users/new'
   #get 'users/edit'

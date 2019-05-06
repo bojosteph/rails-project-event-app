@@ -7,11 +7,9 @@ class EventsController < ApplicationController
     @user = current_user
     if params[:category]
       @category = Category.find_by(id: params[:category][:id])
-
       @events = @category.events
     else
-
-      @events = Event.all
+      @events = Event.active_event
     end
   end
 
@@ -63,6 +61,11 @@ class EventsController < ApplicationController
     @user = current_user
     Event.find(params[:id]).delete
     redirect_to user_events_path(@user)
+  end
+
+  def past 
+    @user = current_user
+    @events = Event.past_event   
   end
 
   private
