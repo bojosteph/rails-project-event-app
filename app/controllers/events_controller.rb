@@ -1,12 +1,18 @@
 
-
 class EventsController < ApplicationController
   before_action :confirm_logged_in
   before_action :set_time_zone, if: :logged_in?
 
   def index
     @user = current_user
-    @events = Event.all
+    if params[:category]
+      @category = Category.find_by(id: params[:category][:id])
+
+      @events = @category.events
+    else
+
+      @events = Event.all
+    end
   end
 
   def show
@@ -22,13 +28,14 @@ class EventsController < ApplicationController
   end
 
   def create
-    #raise params.inspect
+    # raise params.inspect
     @user = current_user
     @event = @user.events.build(event_params(:name, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
 
     if @event.save
       redirect_to user_event_path(@user, @event)
     else
+      @event.build_category
       render :new
     end
   end
@@ -37,6 +44,7 @@ class EventsController < ApplicationController
     # raise params.inspect
     @user = current_user
     @event = Event.find(params[:id])
+    @event.build_category
   end
 
   def update
@@ -45,6 +53,7 @@ class EventsController < ApplicationController
     if @event.update(event_params(:name, :date, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
       redirect_to user_event_path(@user, @event)
     else
+      @event.build_category
       render :edit
     end
   end
@@ -56,8 +65,6 @@ class EventsController < ApplicationController
     redirect_to user_events_path(@user)
   end
 
-  
-
   private
 
   def event_params(*args)
@@ -65,8 +72,6 @@ class EventsController < ApplicationController
   end
 
   def set_time_zone
-    Time.zone = 'Central Time (US & Canada)'
+    Time.zone = 'Eastern Time (US & Canada)'
   end
-
-  
 end
