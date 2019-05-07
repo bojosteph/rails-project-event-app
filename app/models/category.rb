@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   has_many :events
+  
   validates :name, presence: true
   validate :category_exist, on: :create
   before_save :upcase_name
