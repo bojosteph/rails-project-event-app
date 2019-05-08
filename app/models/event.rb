@@ -42,6 +42,10 @@ class Event < ApplicationRecord
     where('end_date < ?', DateTime.now)
   end
 
+  def self.todays_event
+    where('start_date == ?', Date.today)
+  end
+
   def has_date_range?
     start_date.present? && end_date.present?
   end

@@ -1,61 +1,71 @@
-<div class="container">
-  
-  <h1 class="display-2" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;"> All Upcoming
-    Events</h1>
-    
-    <div class="filter">
-      <%= form_tag '#', :method => :get do%>
-      <%= collection_select :category, :id, Category.all, :id, :name, placeholder: "FILTER BY CATEGORY" %>
-      <%= submit_tag 'Filter' %>
-      <% end %>
-    </div>
+<body id="event_index">
+  <div class="container">
+
+    <div class="links">
+      <%= link_to "Today's Events", todays_events_events_path %>
+      <%= link_to "Future Events", active_events_events_path %>
+      <%= link_to "Past Events", past_events_events_path %>
+      <%= link_to "All Events", all_events_events_path %>
+      <br><br>
 
 
-  <div class="row">
+      <h3 class="display-2" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;"> All Upcoming
+        Events</h3>
 
-    <% @events.each do |event| %>
-
-    <div class="col-sm" style="padding-bottom: 10px;">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-
-          <h5 class="card-title">
-            <%= event.name %>
-          </h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            <%= start_of_event event %>
-          </h6>
-          <h6 class="card-subtitle mb-2 text-muted">
-            <%= end_of_event  event %>
-          </h6>
-          <h6 class="card-subtitle mb-2 text-muted">
-            <%= event.location %>
-          </h6>
-          <p class="card-text">
-            <%= event.description.truncate(25, separator: /\s/) %>
-          </p>
-          <a href="<%= user_event_path(@user, event) %>" class="card-link">Event Details</a>
-
-        </div>
+      <div class="filter">
+        <%= form_tag '#', :method => :get do%>
+        <%= collection_select :category, :id, Category.all, :id, :name, placeholder: "FILTER BY CATEGORY" %>
+        <%= submit_tag 'Filter' %>
+        <% end %>
       </div>
     </div>
 
-    <br />
-    <br />
+    <div class="row">
 
-    <% end %>
+      <% @events.each do |event| %>
 
-    <br />
-    <div id="events">
-      <%= month_calendar events: @events do |date, events| %>
-      <%= date %>
+      <div class="col-sm" style="padding-bottom: 10px;">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
 
-      <% events.each do |event| %>
+            <h5 class="card-title">
+              <%= event.name %>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              <%= start_of_event event %>
+            </h6>
+            <h6 class="card-subtitle mb-2 text-muted">
+              <%= end_of_event  event %>
+            </h6>
+            <h6 class="card-subtitle mb-2 text-muted">
+              <%= event.location %>
+            </h6>
+            <p class="card-text">
+              <%= event.description.truncate(25, separator: /\s/) %>
+            </p>
+            <a href="<%= user_event_path(@user, event) %>" class="card-link">Event Details</a>
+
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+
+      <% end %>
+
+      <br />
+      <div id="events">
+        <%= month_calendar events: @events do |date, events| %>
+        <%= date %>
+
+        <% events.each do |event| %>
         <div>
           <%= event.name %>
         </div>
-      <% end %>
-      <% end %>
+        <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
+</body>

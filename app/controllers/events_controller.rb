@@ -69,6 +69,24 @@ class EventsController < ApplicationController
     render :index  
   end
 
+  def active
+    @user = current_user
+    @events = Event.active_event
+    render :index
+  end
+
+  def today
+    @user = current_user
+    @events = Event.todays_event
+    render :index
+  end
+
+  def all 
+    @user = current_user
+    @events = Event.all 
+    render :index 
+  end
+
   private
 
   def event_params(*args)

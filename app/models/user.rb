@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, :username
 
   has_many :events, foreign_key: 'planner_id'
   has_many :rsvp_events, foreign_key: :participant_id

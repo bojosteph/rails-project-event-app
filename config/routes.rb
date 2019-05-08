@@ -4,26 +4,28 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get '/signout', to: 'devise/sessions#destroy', as: :signout
+    get '/signin', to:  'devise/sessions#create' , as: :signin
+    get 'signup' , to:  'devise/registrations#new', as: :signup
   end
   
-  get 'sessions/new'
-  get 'sessions/destroy'
-  post 'sessions/create'
+  # get 'sessions/new'
+  # get 'sessions/destroy'
+  # post 'sessions/create'
   get 'events/delete' => 'events#destroy'
   get 'rsvp_events/delete' => 'rsvp_events#destroy'
-  get '/auth/:provider/callback' => "sessions#create"
-  #get 'auth/google/callback', to: 'sessions#googleAuth'
-  get '/auth/failure' => 'home#index'
+  #get '/auth/:provider/callback' => "sessions#create"
+    
   #post '/rsvp_events/create', to: 'rsvp_events#create'
-  get 'events/past'  => 'events#past'
+  resources :events do  
+    collection do 
+      get 'past_events' => 'events#past'
+      get 'active_events' => 'events#active'
+      get 'todays_events' => 'events#today'
+      get 'all_events' => 'events#all'
+    end
+  end
   
-
-  #get 'users/new'
-  #get 'users/edit'
-  #get 'events/new'
-  #get 'events/edit'
-  #get 'events/index'
-  #get 'events/show'
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users do 
     resources :events, only: [:show, :index, :new, :edit, :create, :update]
