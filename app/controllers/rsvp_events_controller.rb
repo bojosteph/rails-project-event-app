@@ -1,6 +1,6 @@
 
 class RsvpEventsController < ApplicationController
-  before_action :confirm_logged_in
+  before_action :authenticate_user!
 
   def index
     @rsvp_events = RsvpEvent.all

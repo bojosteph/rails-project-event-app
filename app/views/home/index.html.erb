@@ -10,11 +10,10 @@
             <div class="w-100 text-white">
                 <h1 class="display-3" style="color:white">Welcome to Rails Event App</h1>
                 <br />
-                <% if not logged_in? %>
-                <h3><a href="/sessions/new">Log In</a></h3>
-                <h3><a href="/users/new">Create Account</a></h3>
-                <h4><%= link_to('Log in with Facebook!', '/auth/facebook') %></h4>
-                <h4><a href="/auth/google_oauth2">Sign in with Google</a></h4>
+                <% if not user_signed_in? %>
+                <h3><a href="/users/sign_in">Log In</a> </h3>
+                <h3><a href="/users/sign_up">Create Account</a></h3>
+                <h4><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></h4>
                 <% end %>
             </div>
         </div>

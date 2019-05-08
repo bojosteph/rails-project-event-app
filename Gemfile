@@ -27,6 +27,7 @@ gem 'rspec-rails'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
@@ -34,8 +35,8 @@ gem 'dotenv-rails'
 gem "simple_calendar", "~> 2.0"
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
-gem 'fullcalendar-rails'
-gem 'momentjs-rails'
+# gem 'fullcalendar-rails'
+# gem 'momentjs-rails'
 
 
 # Use ActiveStorage variant

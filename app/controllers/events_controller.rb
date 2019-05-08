@@ -1,7 +1,7 @@
 
 class EventsController < ApplicationController
-  before_action :confirm_logged_in
-  before_action :set_time_zone, if: :logged_in?
+  before_action :authenticate_user!
+  before_action :set_time_zone, if: :user_signed_in?
 
   def index
     @user = current_user
@@ -65,7 +65,8 @@ class EventsController < ApplicationController
 
   def past 
     @user = current_user
-    @events = Event.past_event   
+    @events = Event.past_event 
+    render :index  
   end
 
   private

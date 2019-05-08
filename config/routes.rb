@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
+
+  devise_scope :user do
+    get '/signout', to: 'devise/sessions#destroy', as: :signout
+  end
+  
   get 'sessions/new'
   get 'sessions/destroy'
   post 'sessions/create'
@@ -7,9 +13,9 @@ Rails.application.routes.draw do
   get 'rsvp_events/delete' => 'rsvp_events#destroy'
   get '/auth/:provider/callback' => "sessions#create"
   #get 'auth/google/callback', to: 'sessions#googleAuth'
-  get '/auth/failure' => 'public#index'
+  get '/auth/failure' => 'home#index'
   #post '/rsvp_events/create', to: 'rsvp_events#create'
-
+  get 'events/past'  => 'events#past'
   
 
   #get 'users/new'
@@ -27,5 +33,5 @@ Rails.application.routes.draw do
      post '/rsvp_events/create', to: 'rsvp_events#create', on: :member
   end
     
-  root :to => 'public#index'
+  root :to => 'home#index'
 end

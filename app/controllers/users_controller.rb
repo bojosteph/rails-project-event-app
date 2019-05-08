@@ -1,7 +1,7 @@
 
 
 class UsersController < ApplicationController
-  before_action :confirm_logged_in, except: %i[new create]
+  before_action :authenticate_user!, except: %i[new create]
 
   def index
     @user = User.all
