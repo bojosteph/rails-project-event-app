@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :events, foreign_key: 'planner_id'
   has_many :rsvp_events, foreign_key: :participant_id
   has_many :attending_events, through: :rsvp_events
+  has_many :reviews, foreign_key: :reviewer_id
+  has_many :reviewing_events, through: :reviews
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

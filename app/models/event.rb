@@ -6,6 +6,8 @@ class Event < ApplicationRecord
   validates_presence_of :name, :location, :description, :start_date, :end_date
   has_many :rsvp_events, foreign_key: :attending_event_id, dependent: :destroy
   has_many :participants, through: :rsvp_events
+  has_many :reviews,  foreign_key: :reviewing_event_id
+  has_many :reviewers, through: :reviews 
   validates_associated :category, message: "is already on list or invalid format."
   alias_attribute :start_time, :start_date
   alias_attribute :end_time, :end_date

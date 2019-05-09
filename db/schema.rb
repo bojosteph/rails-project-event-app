@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_004608) do
+ActiveRecord::Schema.define(version: 2019_05_09_165101) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 2019_05_08_004608) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "reviewer_id"
+    t.integer "reviewing_event_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "rating"
+    t.index ["reviewer_id", "reviewing_event_id"], name: "index_reviews_on_reviewer_id_and_reviewing_event_id"
   end
 
   create_table "rsvp_events", force: :cascade do |t|

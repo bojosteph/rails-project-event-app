@@ -46,6 +46,8 @@
   <% if @event.planner_id != current_user.id %>
   <div class="rsvp">
     <%= button_to "Rsvp now", rsvp_events_create_event_path(event_id: @event.id), class: "btn btn-outline-success btn-lg btn-block" %>
+    <<a class="btn btn-outline-warning btn-lg btn-block" href="<%= new_event_review_path(@event) %>">Review
+      Rsvp</a>
   </div>
   <br />
   <a class="btn btn-outline-warning btn-lg btn-block" href="<%= rsvp_events_delete_path(id: @event.id) %>">Cancel Rsvp</a>

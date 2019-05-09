@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # get 'reviews/new'
+  # get 'reviews/edit'
+  # get 'reviews/index'
+  # get 'reviews/show'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks"}
 
   devise_scope :user do
@@ -24,6 +28,10 @@ Rails.application.routes.draw do
       get 'all_events' => 'events#all'
       get 'top_events' => 'events#top'
     end
+  end
+  
+  resources :events do
+    resources :reviews
   end
   
   
