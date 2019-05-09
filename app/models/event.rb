@@ -53,7 +53,7 @@ class Event < ApplicationRecord
   end
 
   def self.todays_event
-    where('start_date == ?', Date.today)
+    where('start_date = ?', Date.today)
   end
 
   def has_date_range?
