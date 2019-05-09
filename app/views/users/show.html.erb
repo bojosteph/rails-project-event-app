@@ -1,7 +1,7 @@
 <div class="container">
   <h2 style="padding-top: 12px; padding-bottom: 12px;">
 
-    <h5 style="color:#000080"><%= @user.full_name.upcase %> LIST OF EVENTS</h5>
+    <h5 style="color:#000080"><%= @user.full_name.upcase %> EVENTS</h5>
     <br />
     <h6>No. OF ACTIVE EVENTS : <%= @user.events.active_event.count %></h6>
     <h6>No. OF PAST EVENTS &nbsp &nbsp : <%= @user.events.past_event.count %></h6>
@@ -10,8 +10,9 @@
     <div class="row">
 
       <div class="col-lg-3">
+        <h5 style="color:#003366" >LIST OF EVENTS :</h5>
         <% @event.each do |event| %>
-          <p> <%= link_to event.name.upcase, user_event_path(@user, event) %></p>
+          <h6 style="color:#003366"> <%= link_to event.name.upcase, user_event_path(@user, event) %></h6>
         <% end %>
       </div>
 

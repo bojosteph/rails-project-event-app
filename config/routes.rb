@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get 'active_events' => 'events#active'
       get 'todays_events' => 'events#today'
       get 'all_events' => 'events#all'
+      get 'top_events' => 'events#top'
     end
   end
   

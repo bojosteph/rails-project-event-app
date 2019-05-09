@@ -83,9 +83,16 @@ class EventsController < ApplicationController
 
   def all 
     @user = current_user
-    @events = Event.all 
+    @events = Event.all
     render :index 
   end
+
+ def top 
+    @user = current_user
+    @events = Event.top
+    render :index 
+  end 
+    
 
   private
 

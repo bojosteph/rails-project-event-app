@@ -40,21 +40,22 @@
   <br />
   <a class="btn btn-outline-primary btn-lg btn-block" href="<%=user_events_url %>">All Upcoming Events</a>
   <br />
+  
+  
+ 
+  <% if @event.planner_id != current_user.id %>
+  <div class="rsvp">
+    <%= button_to "Rsvp now", rsvp_events_create_event_path(event_id: @event.id), class: "btn btn-outline-success btn-lg btn-block" %>
+  </div>
+  <br />
+  <a class="btn btn-outline-warning btn-lg btn-block" href="<%= rsvp_events_delete_path(id: @event.id) %>">Cancel Rsvp</a>
+  <br />
+  <% end %>
   <% if @event.planner_id == @user.id %>
   <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_user_event_path(@event) %>">Edit Event</a>
   <br />
-  <a class="btn btn-outline-info btn-lg btn-block" href="/users/<%= @user.id %>">Your Events</a>
+  <a class="btn btn-outline-success btn-lg btn-block" href="/users/<%= @user.id %>">Your Events</a>
   <br />
-
-  <a class="btn btn-outline-info btn-lg btn-block" href="<%= events_delete_path(id: @event.id) %>">Delete Event</a>
-  <% end %>
-  <br />
-  <br />
-  <% if @event.planner_id != current_user.id %>
-  <div class="rsvp">
-    <%= button_to "Rsvp now", rsvp_events_create_event_path(event_id: @event.id), class: "btn btn-primary" %>
-  </div>
-  <a class="btn btn-primary" href="<%= rsvp_events_delete_path(id: @event.id) %>">Cancel Rsvp</a>
-  <br />
+  <a class="btn btn-outline-warning btn-lg btn-block" href="<%= events_delete_path(id: @event.id) %>">Delete Event</a>
   <% end %>
 </div>
