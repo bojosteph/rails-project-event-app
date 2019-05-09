@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  validates_uniqueness_of :email, :username
-
+  validates_uniqueness_of :email
+  validates_presence_of :username, :full_name
   has_many :events, foreign_key: 'planner_id'
   has_many :rsvp_events, foreign_key: :participant_id
-  has_many :attending_events, through: :rsvp_events, source: :event
+  has_many :attending_events, through: :rsvp_events
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

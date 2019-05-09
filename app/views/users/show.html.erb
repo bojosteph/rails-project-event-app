@@ -1,27 +1,33 @@
 <div class="container">
   <h2 style="padding-top: 12px; padding-bottom: 12px;">
 
-    
-
-      <h3>User Events</h3>
-    <ul>
-      <% @event.each do |event| %>
-      <li>
-        <h4><%= link_to event.name, user_event_path(@user, event) %></h4>
-      </li>
-      <% end %>
-    </ul>
-</div>
+    <h5 style="color:#000080"><%= @user.full_name.upcase %> LIST OF EVENTS</h5>
+    <br />
+    <h6>No. OF ACTIVE EVENTS : <%= @user.events.active_event.count %></h6>
+    <h6>No. OF PAST EVENTS &nbsp &nbsp : <%= @user.events.past_event.count %></h6>
 
 
-<div id="events">
-  <%= month_calendar events: @event do |date, events| %>
-  <%= date %>
+    <div class="row">
 
-  <% events.each do |event| %>
-  <div>
-    <%= event.name %>
-  </div>
-  <% end %>
-  <% end %>
-</div>
+      <div class="col-lg-3">
+        <% @event.each do |event| %>
+          <p> <%= link_to event.name.upcase, user_event_path(@user, event) %></p>
+        <% end %>
+      </div>
+
+      
+
+        <br><br>
+   <div class="w-100">
+      <div id="events">
+        <%= month_calendar events: @event do |date, events| %>
+        <%= date %>
+
+          <% events.each do |event| %>
+            <div>
+              <%= event.name %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+   </div>

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params(:username, :email, :password, :name, :google_token, :google_refresh_token))
+    @user = User.new(user_params(:username, :email, :password, :full_name))
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'User created successfully.'
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params(:username, :email, :password, :name, :google_token, :google_refresh_token))
+    if @user.update(user_params(:username, :email, :password, :full_name))
       flash[:notice] = 'User updated successfully.'
       redirect_to user_path(@user)
     else

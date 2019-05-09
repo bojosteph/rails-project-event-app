@@ -1,11 +1,24 @@
 <body id="event_index">
   <div class="container">
 
+    <div class="row">
+      <div class="col-lg-3">
+        <p> <%= link_to "Today's Events", todays_events_events_path %></p>
+      </div>
+      <br />
+      <div class="col-lg-3">
+        <p><%= link_to "Future Events", active_events_events_path %></p>
+      </div>
+      <div class="col-lg-3">
+        <p><%= link_to "Past Events", past_events_events_path %></p>
+      </div>
+      <div class="col-lg-3">
+        <p><%= link_to "All Events", all_events_events_path %></p>
+      </div>
+    </div>
+
     <div class="links">
-      <%= link_to "Today's Events", todays_events_events_path %>
-      <%= link_to "Future Events", active_events_events_path %>
-      <%= link_to "Past Events", past_events_events_path %>
-      <%= link_to "All Events", all_events_events_path %>
+
       <br><br>
 
 
@@ -29,7 +42,7 @@
           <div class="card-body">
 
             <h5 class="card-title">
-              <%= event.name %>
+              <%=event.name.upcase %>
             </h5>
             <h6 class="card-subtitle mb-2 text-muted">
               <%= start_of_event event %>
@@ -37,8 +50,8 @@
             <h6 class="card-subtitle mb-2 text-muted">
               <%= end_of_event  event %>
             </h6>
-            <h6 class="card-subtitle mb-2 text-muted">
-              <%= event.location %>
+            <h6 class="card-subtitle mb-2 text-muted">LOCATION:
+              <%= event.location.upcase %>
             </h6>
             <p class="card-text">
               <%= event.description.truncate(25, separator: /\s/) %>
@@ -55,16 +68,15 @@
       <% end %>
 
       <br />
-      <div id="events">
-        <%= month_calendar events: @events do |date, events| %>
-        <%= date %>
-
-        <% events.each do |event| %>
-        <div>
-          <%= event.name %>
+      <div class="w-100"></div>
+        <div id="events">
+          <%= month_calendar events: @events do |date, events| %>
+            <%= date %>
+            <% events.each do |event| %>
+              <%= event.name %>
+            <% end %>
+          <% end %>
         </div>
-        <% end %>
-        <% end %>
       </div>
     </div>
   </div>

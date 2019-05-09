@@ -5,7 +5,7 @@ class Event < ApplicationRecord
   belongs_to :category
   validates_presence_of :name, :location, :description, :start_date, :end_date
   has_many :rsvp_events, foreign_key: :attending_event_id, dependent: :destroy
-  has_many :participants, through: :rsvp_events, source: :user
+  has_many :participants, through: :rsvp_events
   validates_associated :category, message: "is already on list or invalid format."
   alias_attribute :start_time, :start_date
   alias_attribute :end_time, :end_date
@@ -14,6 +14,8 @@ class Event < ApplicationRecord
   validate :date_must_be_current, if: :has_date_range?
   validate :correct_date_range, if: :has_date_range?
   validate :no_overlapping_events, on: :create
+
+  #before_save :upcase_name
 
   scope :overlapping, lambda { |start_date, end_date|
     where(
@@ -60,6 +62,10 @@ class Event < ApplicationRecord
     unless end_date >= start_date
       errors.add(:end_date, 'must be on or after start of event')
     end
+  end
+
+  def upcase_name
+    self.name.upcase!
   end
 
   def category_attributes=(category_attributes)

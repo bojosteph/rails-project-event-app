@@ -1,41 +1,42 @@
 <div class="container">
-  <h2 style="padding-top: 12px; padding-bottom: 12px;">
+  <h2 style=" padding-top: 12px; color:#483D8B; padding-bottom: 12px;">
 
-    <%= @event.name %>
+    <%= @event.name.upcase %>
   </h2>
   <br />
-  <h4>Category:
+  <h4 style="color:#000080">CATEGORY:
     <%= @event.category.name %>
   </h4>
-
+     <h5>No. OF PARTICIPANTS : <%= @event.participants.count %></h5>
   <h4>
     <%= start_of_event(@event) %>
   </h4>
   <h4>
     <%= end_of_event(@event) %>
   </h4>
-  <h4>Location:
-    <%= @event.location %>
+  <h4>LOCATION:
+    <%= @event.location.upcase %>
   </h4>
   <br />
   
-    <h5>Description:
-      <%= @event.description %>
+    <h5 style="color: #000033">DESCRIPTION:
+      <%= @event.description.upcase %>
     </h5>
-  
+  <h5>EVENT PARTICIPANTS:</h5>
   <% @rsvp_events.each do |rsvp| %>
-
-  <ul>
-    Event Participants:
-    <li> Name:
-      <%= rsvp.participant.name %>
-      &ensp; Email:
-      <%= rsvp.participant.email %>
+ <h6 style="color:#2F4F4F">
+  
+   
+   <ul>
+    <li> NAME:
+      <%= rsvp.participant.full_name.upcase %>
+      &ensp; EMAIL:
+      <%= rsvp.participant.email.upcase %>
     </li>
-    
+     
   </ul>
-
-  <% end %>
+ </h6>
+<% end %>
   <br />
   <a class="btn btn-outline-primary btn-lg btn-block" href="<%=user_events_url %>">All Upcoming Events</a>
   <br />
