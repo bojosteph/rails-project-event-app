@@ -92,7 +92,14 @@ class EventsController < ApplicationController
     @user = current_user
     @events = Event.top
     render :index 
-  end 
+  end
+  
+  def highest_rated
+    @user = current_user
+    @events = Event.highest_rated
+    render :index
+  end
+
     
 
   private

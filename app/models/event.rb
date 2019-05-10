@@ -26,13 +26,17 @@ class Event < ApplicationRecord
     )
   }
 
-   def self.top
+  def self.top
     select('events.*, COUNT(rsvp_events.id) AS rsvp_events_count').
-      joins(:rsvp_events).                                                   
-      group('events.id').
-      order('rsvp_events_count DESC').
-      limit(5)
-    end
+    joins(:rsvp_events).                                                   
+    group('events.id').
+    order('rsvp_events_count DESC').
+    limit(5)
+  end
+
+  def self.highest_rated
+    joins(:reviews).select("*, avg(reviews.rating) as average_rating").group("events.id").order("average_rating DESC").limit(3)
+  end
 
   def no_overlapping_events
     event = Event.overlapping(start_date, end_date)
