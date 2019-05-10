@@ -1,2 +1,7 @@
-<h1>Reviews#edit</h1>
-<p>Find me in app/views/reviews/edit.html.erb</p>
+<div class="container">
+  <h2 class="display-4" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;">EDIT YOUR REVIEW
+    </h2>
+
+  <%= render partial:'form', locals: {event: @event, review: @review} %>
+
+</div>

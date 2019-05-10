@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # post 'sessions/create'
   get 'events/delete' => 'events#destroy'
   get 'rsvp_events/delete' => 'rsvp_events#destroy'
+  get 'delete_review' => 'reviews#destroy'
   #get '/auth/:provider/callback' => "sessions#create"
     
   #post '/rsvp_events/create', to: 'rsvp_events#create'

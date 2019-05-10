@@ -37,27 +37,54 @@
   </ul>
  </h6>
 <% end %>
+
+<h5><%=@event.name.upcase %> REVIEWS:</h5>
+<% @reviews.each do |review| %>
+<h6 style="color:#2F4F4F">
+
+
+  <ul>
+    <li> 
+      RATING :
+      <%= review.rating %>&ensp;
+    
+      REVIEW :
+       <%= review.body.upcase %>
+    </li>
+
+  </ul>
+</h6>
+<% end %>
   <br />
-  <a class="btn btn-outline-primary btn-lg btn-block" href="<%=user_events_url %>">All Upcoming Events</a>
+  <a class="btn btn-outline-primary btn-lg btn-block" href="<%=user_events_url %>">ALL UPCOMING EVENTS</a>
   <br />
   
   
  
   <% if @event.planner_id != current_user.id %>
   <div class="rsvp">
-    <%= button_to "Rsvp now", rsvp_events_create_event_path(event_id: @event.id), class: "btn btn-outline-success btn-lg btn-block" %>
-    <<a class="btn btn-outline-warning btn-lg btn-block" href="<%= new_event_review_path(@event) %>">Review
-      Rsvp</a>
+    <%= button_to "RSVP NOW", rsvp_events_create_event_path(event_id: @event.id), class: "btn btn-outline-success btn-lg btn-block" %>
+    <<a class="btn btn-outline-info btn-lg btn-block" href="<%= new_event_review_path(@event) %>">REVIEW
+      EVENT</a>
+ 
+  <br />
+  <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_event_review_path(@event) %>">EDIT REVIEW</a>
+  <br />
+  <a class="btn btn-outline-warning btn-lg btn-block" href="<%= rsvp_events_delete_path(id: @event.id) %>">CANCEL RSVP</a>
+  <br />
+  <a class="btn btn-outline-warning btn-lg btn-block" href="<%= delete_review_path(id: @event.id) %>">DELETE
+    REVIEW</a>
+  <br/>
+  <br/>
+
+  <br/>
   </div>
-  <br />
-  <a class="btn btn-outline-warning btn-lg btn-block" href="<%= rsvp_events_delete_path(id: @event.id) %>">Cancel Rsvp</a>
-  <br />
   <% end %>
   <% if @event.planner_id == @user.id %>
-  <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_user_event_path(@event) %>">Edit Event</a>
+  <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_user_event_path(@event) %>">EDIT EVENT</a>
   <br />
-  <a class="btn btn-outline-success btn-lg btn-block" href="/users/<%= @user.id %>">Your Events</a>
+  <a class="btn btn-outline-success btn-lg btn-block" href="/users/<%= @user.id %>">YOUR EVENTS</a>
   <br />
-  <a class="btn btn-outline-warning btn-lg btn-block" href="<%= events_delete_path(id: @event.id) %>">Delete Event</a>
+  <a class="btn btn-outline-warning btn-lg btn-block" href="<%= events_delete_path(id: @event.id) %>">DELETE EVENT</a>
   <% end %>
 </div>

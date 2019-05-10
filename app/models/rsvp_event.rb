@@ -1,5 +1,4 @@
 
-
 class RsvpEvent < ApplicationRecord
   belongs_to :attending_event, class_name: 'Event', foreign_key: 'attending_event_id'
   belongs_to :participant, class_name: 'User', foreign_key: 'participant_id'
