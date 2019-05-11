@@ -22,7 +22,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @user = current_user
+    #@user = current_user
     @event = Event.new
     @event.build_category
   end
@@ -34,7 +34,7 @@ class EventsController < ApplicationController
 
     if @event.save
       flash[:message] = "YOU HAVE CREATED #{@event.name}"
-      redirect_to user_event_path(@user, @event)
+      redirect_to event_path(@event)
     else
       @event.build_category
       render :new
@@ -43,7 +43,7 @@ class EventsController < ApplicationController
 
   def edit
     # raise params.inspect
-    @user = current_user
+    #@user = current_user
     @event = Event.find(params[:id])
     @event.build_category
   end
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     if @event.update(event_params(:name, :date, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
       flash[:message] = "YOU HAVE UPDATED #{@event.name}"
-      redirect_to user_event_path(@user, @event)
+      redirect_to event_path(@event)
     else
       @event.build_category
       render :edit
@@ -63,43 +63,38 @@ class EventsController < ApplicationController
   def destroy
     # raise params.inspect
     @user = current_user
-    Event.find(params[:id]).delete
-    flash[:message] = "YOU HAVE DELETED #{@event.name}"
-    redirect_to user_events_path(@user)
+    @event = Event.find(params[:id])
+    @event.destroy
+    flash[:message] = "YOU HAVE DELETED #{@event.name}.upcase"
+    redirect_to events_path(@user)
   end
 
   def past 
-    @user = current_user
     @events = Event.past_event 
     render :index  
   end
 
   def active
-    @user = current_user
     @events = Event.active_event
     render :index
   end
 
   def today
-    @user = current_user
     @events = Event.todays_event
     render :index
   end
 
   def all 
-    @user = current_user
     @events = Event.all
     render :all 
   end
 
  def top 
-    @user = current_user
     @events = Event.top
     render :index 
   end
   
   def highest_rated
-    @user = current_user
     @events = Event.highest_rated
     render :event_ratings
   end

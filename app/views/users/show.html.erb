@@ -12,7 +12,7 @@
       <div class="col-lg-3">
         <h5 style="color:#003366" >LIST OF EVENTS :</h5>
         <% @event.each do |event| %>
-          <h6 style="color:#003366"> <%= link_to event.name.upcase, user_event_path(@user, event) %></h6>
+          <h6 style="color:#003366"> <%= link_to event.name.upcase, event_path(event) %></h6>
         <% end %>
       </div>
 

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = 'User created successfully.'
-      redirect_to(user_events_path(:user_id => @user.id))
+      redirect_to(events_path(:user_id => @user.id))
     else
       render :new
     end

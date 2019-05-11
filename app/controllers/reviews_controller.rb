@@ -23,10 +23,10 @@ class ReviewsController < ApplicationController
     @review.reviewer = @user
 
     if @review.save
-      redirect_to user_event_path(user_id: @user.id, id: @event.id)
+      redirect_to event_path(user_id: @user.id, id: @event.id)
     else
       flash[:error] = 'You Already reviewed This Event.'
-      redirect_to user_event_path(user_id: @user.id, id: @event.id)
+      redirect_to event_path(user_id: @user.id, id: @event.id)
     end
   end
 
@@ -43,12 +43,12 @@ class ReviewsController < ApplicationController
       @event = Event.find(params[:id])
       review = Review.find_by(reviewer_id: @user.id, reviewing_event_id: @event.id)
       if review.nil?
-        redirect_to user_events_path(@user, @event), alert: 'You Can Only Cancel Your Review '
+        redirect_to events_path(@event), alert: 'You Can Only Cancel Your Review '
       else
         review.reviewer == @user
         review.delete
         flash[:message] = "You Cancelled Your Review for #{@event.name}."
-        redirect_to user_event_path(@user, @event)
+        redirect_to event_path(@event)
       end
     end
   end
@@ -66,10 +66,10 @@ class ReviewsController < ApplicationController
     @review = Review.find_by(id: params[:id])
     if @review.update(review_params)
       flash[:message] = "You succesfully updated #{@event.name} review"
-      redirect_to user_event_path(user_id: @user.id, id: @event.id)
+      redirect_to event_path(@event)
     else
       flash[:error] = 'Error Updating Review.'
-      redirect_to user_event_path(user_id: @user.id, id: @event.id)
+      redirect_to event_path(@event)
     end
   end
 

@@ -32,13 +32,13 @@
 
           <li class="nav-item active">
             <% @user = current_user %>
-            <a class="nav-link" href="<%= user_events_path(@user) %>">Upcoming Events</a>
+            <a class="nav-link" href="<%= events_path(@user) %>">Upcoming Events</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/users/<%= @user.id %>">Your Events</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%= new_user_event_path(@user)%>">Create Events</a>
+            <a class="nav-link" href="<%= new_event_path(@user)%>">Create Events</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/signout">Log Out</a>

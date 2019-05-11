@@ -17,10 +17,10 @@ class RsvpEventsController < ApplicationController
     @rsvp_event = current_user.rsvp_events.build(attending_event_id: params[:event_id])
 
     if @rsvp_event.save
-      redirect_to user_event_path(@event)
+      redirect_to event_path(@event)
     else
       flash[:error] = 'You Already Joined This Event.'
-      redirect_to user_event_path(@event)
+      redirect_to event_path(@event)
     end
   end
 
@@ -35,13 +35,13 @@ class RsvpEventsController < ApplicationController
       @event = Event.find(params[:id])
       rsvp = RsvpEvent.find_by(participant_id: @user.id, attending_event_id: @event.id)
       if rsvp.nil?
-        redirect_to user_events_path(@user, @event), alert: 'You Can Only Cancel Your Rsvp '
+        redirect_to events_path(@event), alert: 'You Can Only Cancel Your Rsvp '
       else
 
         rsvp.participant == @user
         rsvp.delete
         flash[:message] = "You Cancelled Your Rsvp for #{@event.name}."
-        redirect_to user_event_path(@user, @event)
+        redirect_to event_path(@event)
       end
     end
   end

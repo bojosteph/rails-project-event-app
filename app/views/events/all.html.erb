@@ -35,7 +35,7 @@
           <p class="card-text">
             <%= event.description.truncate(25, separator: /\s/) %>
           </p>
-          <a href="<%= user_event_path(@user, event) %>" class="card-link">Event Details</a>
+          <a href="<%= event_path(event) %>" class="card-link">Event Details</a>
 
         </div>
       </div>
