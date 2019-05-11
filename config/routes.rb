@@ -25,10 +25,10 @@ Rails.application.routes.draw do
     collection do 
       get 'past_events' => 'events#past'
       get 'active_events' => 'events#active'
-      get 'todays_events' => 'events#today'
+      get 'todays' => 'events#today'
       get 'all_events' => 'events#all'
       get 'top_events' => 'events#top'
-      get 'highest_rated' => 'events#highest_rated'
+      #get 'highest_rated' => 'events#highest_rated'
     end
   end
   

@@ -3,4 +3,8 @@ class Review < ApplicationRecord
   belongs_to :reviewer, class_name: 'User', foreign_key: 'reviewer_id'
   validates :reviewer_id, uniqueness: { scope: :reviewing_event_id }
 
+  def average
+    Review.average(:rating)
+  end
+
 end

@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     @user = current_user
     @event = Event.find(params[:id])
     @rsvp_events = RsvpEvent.where(attending_event_id: @event.id)
-    @reviews = Review.where(reviewing_event_id: @event.id)
+    @reviews = Review.where(reviewing_event_id: @event.id) 
   end
 
   def new
@@ -32,6 +32,7 @@ class EventsController < ApplicationController
     @event = @user.events.build(event_params(:name, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
 
     if @event.save
+      flash[:message] = "YOU HAVE CREATED #{@event.name}"
       redirect_to user_event_path(@user, @event)
     else
       @event.build_category
@@ -50,6 +51,7 @@ class EventsController < ApplicationController
     @user = current_user
     @event = Event.find(params[:id])
     if @event.update(event_params(:name, :date, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
+      flash[:message] = "YOU HAVE UPDATED #{@event.name}"
       redirect_to user_event_path(@user, @event)
     else
       @event.build_category
@@ -61,6 +63,7 @@ class EventsController < ApplicationController
     # raise params.inspect
     @user = current_user
     Event.find(params[:id]).delete
+    flash[:message] = "YOU HAVE DELETED #{@event.name}"
     redirect_to user_events_path(@user)
   end
 
@@ -97,7 +100,7 @@ class EventsController < ApplicationController
   def highest_rated
     @user = current_user
     @events = Event.highest_rated
-    render :index
+    render :event_ratings
   end
 
     

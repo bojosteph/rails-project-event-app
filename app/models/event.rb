@@ -38,6 +38,14 @@ class Event < ApplicationRecord
     joins(:reviews).select("*, avg(reviews.rating) as average_rating").group("events.id").order("average_rating DESC").limit(3)
   end
 
+  # def average_rating
+  #   if self.reviews.size > 0
+  #       self.reviews.average(:rating)
+  #   else
+  #       'undefined'
+  #   end
+  # end
+
   def no_overlapping_events
     event = Event.overlapping(start_date, end_date)
     overlaps = event.where('planner_id = ?', planner_id)
