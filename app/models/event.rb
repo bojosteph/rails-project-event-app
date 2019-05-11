@@ -1,23 +1,22 @@
 
-class Event < ApplicationRecord
 
+class Event < ApplicationRecord
   belongs_to :planner, class_name: 'User', foreign_key: 'planner_id'
   belongs_to :category
   validates_presence_of :name, :location, :description, :start_date, :end_date
   has_many :rsvp_events, foreign_key: :attending_event_id, dependent: :destroy
   has_many :participants, through: :rsvp_events
-  has_many :reviews,  foreign_key: :reviewing_event_id
-  has_many :reviewers, through: :reviews 
-  validates_associated :category, message: "is already on list or invalid format."
+  has_many :reviews, foreign_key: :reviewing_event_id
+  has_many :reviewers, through: :reviews
+  validates_associated :category, message: 'is already on list or invalid format.'
   alias_attribute :start_time, :start_date
   alias_attribute :end_time, :end_date
-  
 
   validate :date_must_be_current, if: :has_date_range?
   validate :correct_date_range, if: :has_date_range?
   validate :no_overlapping_events, on: :create
 
-  #before_save :upcase_name
+  # before_save :upcase_name
 
   scope :overlapping, lambda { |start_date, end_date|
     where(
@@ -27,24 +26,20 @@ class Event < ApplicationRecord
   }
 
   def self.top
-    select('events.*, COUNT(rsvp_events.id) AS rsvp_events_count').
-    joins(:rsvp_events).                                                   
-    group('events.id').
-    order('rsvp_events_count DESC').
-    limit(5)
+    select('events.*, COUNT(rsvp_events.id) AS rsvp_events_count')
+      .joins(:rsvp_events)
+      .group('events.id')
+      .order('rsvp_events_count DESC')
+      .limit(5)
   end
+
+  # def self.highest_rated
+  #   joins(:reviews).select("*, avg(reviews.rating) as average_rating").group("events.id").order("average_rating DESC").limit(3)
+  # end
 
   def self.highest_rated
-    joins(:reviews).select("*, avg(reviews.rating) as average_rating").group("events.id").order("average_rating DESC").limit(3)
+    select('events.*, avg(reviews.rating) AS average_rating').joins(:reviews).group('events.id').order('average_rating DESC').limit(5)
   end
-
-  # def average_rating
-  #   if self.reviews.size > 0
-  #       self.reviews.average(:rating)
-  #   else
-  #       'undefined'
-  #   end
-  # end
 
   def no_overlapping_events
     event = Event.overlapping(start_date, end_date)
@@ -87,14 +82,10 @@ class Event < ApplicationRecord
   end
 
   def upcase_name
-    self.name.upcase!
+    name.upcase!
   end
 
   def category_attributes=(category_attributes)
-    if !category_attributes[:name].blank?
-      self.build_category(category_attributes)
-    end
+    build_category(category_attributes) unless category_attributes[:name].blank?
   end
-
 end
-

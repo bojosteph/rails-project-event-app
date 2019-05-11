@@ -3,7 +3,7 @@
 
     <div class="row">
       <div class="col-lg-3">
-        <p> <%= link_to "HIGHEST RATED EVENT", highest_rated_events_path %></p>
+        <p> <%= link_to "TODAYS EVENT", todays_events_path %></p>
       </div>
       <div class="col-lg-3">
         <p><%= link_to "PAST EVENTS", past_events_events_path %></p>
@@ -23,16 +23,13 @@
 
       <h3 class="display-2" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;"> All Upcoming
         Events</h3>
-        <br />
-        
+      <br />
+
+      <h4 style="color:rgb(20, 67, 177)">THE HIGHEST RATED EVENT IS <%= @events.first.name.upcase %></h4>
+
+      <br />
+
       
-      <div class="filter">
-        <%= form_tag '#', :method => :get do%>
-        <%= collection_select :category, :id, Category.all, :id, :name, placeholder: "FILTER BY CATEGORY" %>
-        <%= submit_tag 'Filter' %>
-        <% end %>
-      </div>
-    </div>
 
     <div class="row">
 
@@ -69,16 +66,7 @@
       <% end %>
 
       <br />
-      <div class="w-100"></div>
-        <div id="events">
-          <%= month_calendar events: @events do |date, events| %>
-            <%= date %>
-            <% events.each do |event| %>
-              <%= event.name %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+      
+  </div>
   </div>
 </body>

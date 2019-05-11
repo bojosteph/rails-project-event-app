@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       get 'todays' => 'events#today'
       get 'all_events' => 'events#all'
       get 'top_events' => 'events#top'
-      #get 'highest_rated' => 'events#highest_rated'
+      get 'highest_rated' => 'events#highest_rated'
     end
   end
   

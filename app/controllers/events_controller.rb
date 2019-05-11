@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    # raise params.inspect
     @user = current_user
     @event = Event.find(params[:id])
     @rsvp_events = RsvpEvent.where(attending_event_id: @event.id)
@@ -88,7 +89,7 @@ class EventsController < ApplicationController
   def all 
     @user = current_user
     @events = Event.all
-    render :index 
+    render :all 
   end
 
  def top 
