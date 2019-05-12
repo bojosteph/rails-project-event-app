@@ -27,15 +27,15 @@
     <%= @event.description.upcase %>
   </h5>
   <h5>EVENT PARTICIPANTS:</h5>
-  <% @rsvp_events.each do |rsvp| %>
+  
   <h6 style="color:#2F4F4F">
 
-
+   <% unless @rsvp_event.blank? %>
     <ul>
       <li> NAME:
-        <%= rsvp.participant.full_name.upcase %>
+        <%= @rsvp_event.participant.full_name.upcase %>
         &ensp; EMAIL:
-        <%= rsvp.participant.email.upcase %>
+        <%= @rsvp_event.participant.email.upcase %>
       </li>
 
     </ul>
@@ -43,22 +43,23 @@
   <% end %>
 
   <h5><%=@event.name.upcase %> REVIEWS:</h5>
-  <% @reviews.each do |review| %>
+ 
   <h6 style="color:#2F4F4F">
 
-
+   <% unless @review.blank? %>
     <ul>
       <li>
         RATING :
-        <%= review.rating %>&ensp;
+        <%= @review.rating %>&ensp;
 
         REVIEW :
-        <%= review.body.upcase %>
+        <%= @review.body.upcase %>
       </li>
 
     </ul>
+    <% end %>
   </h6>
-  <% end %>
+   
   <br />
   <a class="btn btn-outline-primary btn-lg btn-block" href="<%=events_url %>">ALL UPCOMING EVENTS</a>
   <br />
@@ -67,19 +68,20 @@
   <div class="rsvp">
     <%= button_to "RSVP NOW", rsvp_events_create_event_path(event_id: @event.id), class: "btn btn-outline-success btn-lg btn-block" %>
       <br>
-      <% @rsvp_events.each do |rsvp| %>
-
-        <% if rsvp.participant_id = current_user.id %>
+      
+        <% unless @rsvp_event.blank? %>
+        <% if @rsvp_event.participant_id = current_user.id %>
           <a class="btn btn-outline-warning btn-lg btn-block" href="<%= rsvp_events_delete_path(id: @event.id) %>">CANCEL
             RSVP</a>
             <br />
           <a class="btn btn-outline-info btn-lg btn-block" href="<%= new_event_review_path(@event) %>">REVIEW
             EVENT</a>
-            <% @reviews.each do |review| %>
+            
 
 
             <br />
-            <% if review.reviewer_id = current_user.id %>
+            <% unless @review.blank? %>
+            <% if @review.reviewer_id = current_user.id %>
             <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_event_review_path(@event) %>">EDIT REVIEW</a>
             <br />
 
@@ -96,6 +98,8 @@
       <% end %>
     <% end %>
   <% end %>
+   
+  
 
   <% if @event.planner_id == @user.id %>
   <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_event_path(@event) %>">EDIT EVENT</a>
