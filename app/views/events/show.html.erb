@@ -30,12 +30,12 @@
   
   <h6 style="color:#2F4F4F">
 
-   <% unless @rsvp_event.blank? %>
+   <% @rsvp_events.each do |rsvp| %>
     <ul>
       <li> NAME:
-        <%= @rsvp_event.participant.full_name.upcase %>
+        <%= rsvp.participant.full_name.upcase %>
         &ensp; EMAIL:
-        <%= @rsvp_event.participant.email.upcase %>
+        <%= rsvp.participant.email.upcase %>
       </li>
 
     </ul>
@@ -46,14 +46,14 @@
  
   <h6 style="color:#2F4F4F">
 
-   <% unless @review.blank? %>
+   <% @reviews.each do |review| %>
     <ul>
       <li>
         RATING :
-        <%= @review.rating %>&ensp;
+        <%= review.rating %>&ensp;
 
         REVIEW :
-        <%= @review.body.upcase %>
+        <%= review.body.upcase %>
       </li>
 
     </ul>

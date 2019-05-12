@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to event_path(user_id: @user.id, id: @event.id)
     else
-      flash[:error] = 'YOU ALREADY REVIEWED THIS EVENT.'
+      flash[:error] = 'YOU ALREADY REVIEWED THIS EVENT OR YOU NEED TO WRITE A REVIEW.'
       redirect_to event_path(user_id: @user.id, id: @event.id)
     end
   end

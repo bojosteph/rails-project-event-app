@@ -19,6 +19,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @rsvp_event = RsvpEvent.find_by(participant_id: @user.id, attending_event_id: @event.id)
     @review = Review.find_by(reviewer_id: @user.id, reviewing_event_id: @event.id)
+    @rsvp_events = RsvpEvent.where(attending_event_id: @event.id)
+    @reviews = Review.where(reviewing_event_id: @event.id) 
   end
 
   def new
