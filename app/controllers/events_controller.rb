@@ -33,7 +33,7 @@ class EventsController < ApplicationController
     @event = @user.events.build(event_params(:name, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
 
     if @event.save
-      flash[:message] = "YOU HAVE CREATED #{@event.name}"
+      flash[:message] = "YOU HAVE CREATED #{@event.name.upcase}"
       redirect_to event_path(@event)
     else
       @event.build_category
@@ -52,7 +52,7 @@ class EventsController < ApplicationController
     @user = current_user
     @event = Event.find(params[:id])
     if @event.update(event_params(:name, :date, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
-      flash[:message] = "YOU HAVE UPDATED #{@event.name}"
+      flash[:message] = "YOU HAVE UPDATED #{@event.name.upcase}"
       redirect_to event_path(@event)
     else
       @event.build_category
