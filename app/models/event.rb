@@ -4,10 +4,10 @@ class Event < ApplicationRecord
   belongs_to :planner, class_name: 'User', foreign_key: 'planner_id'
   belongs_to :category
   validates_presence_of :name, :location, :description, :start_date, :end_date
-  has_many :rsvp_events, foreign_key: :attending_event_id, dependent: :destroy
-  has_many :participants, through: :rsvp_events
+  has_many :rsvp_events, foreign_key: :attending_event_id
+  has_many :participants, through: :rsvp_events, dependent: :destroy
   has_many :reviews, foreign_key: :reviewing_event_id
-  has_many :reviewers, through: :reviews
+  has_many :reviewers, through: :reviews, dependent: :destroy
   validates_associated :category, message: 'is already on list or invalid format.'
   alias_attribute :start_time, :start_date
   alias_attribute :end_time, :end_date
@@ -84,6 +84,11 @@ class Event < ApplicationRecord
   def upcase_name
     name.upcase!
   end
+  
+  def presence
+    self if present?
+  end
+
 
   def category_attributes=(category_attributes)
     build_category(category_attributes) unless category_attributes[:name].blank?

@@ -17,9 +17,10 @@ class RsvpEventsController < ApplicationController
     @rsvp_event = current_user.rsvp_events.build(attending_event_id: params[:event_id])
 
     if @rsvp_event.save
+      flash[:message] = "THANK YOU FOR JOINING #{@event.name.upcase}"
       redirect_to event_path(@event)
     else
-      flash[:error] = 'You Already Joined This Event.'
+      flash[:error] = 'YOU ALREADY JOINED THIS EVENT.'
       redirect_to event_path(@event)
     end
   end
@@ -35,12 +36,12 @@ class RsvpEventsController < ApplicationController
       @event = Event.find(params[:id])
       rsvp = RsvpEvent.find_by(participant_id: @user.id, attending_event_id: @event.id)
       if rsvp.nil?
-        redirect_to events_path(@event), alert: 'You Can Only Cancel Your Rsvp '
+        redirect_to events_path(@event), alert: 'YOU CAN ONLY CANCEL YOUR RSVP '
       else
 
         rsvp.participant == @user
         rsvp.delete
-        flash[:message] = "You Cancelled Your Rsvp for #{@event.name}."
+        flash[:message] = "YOU CANCELLED YOUR RSVP FOR  #{@event.name.upcase}."
         redirect_to event_path(@event)
       end
     end

@@ -4,17 +4,11 @@
       <br><br>
 
 
-      <h5 class="display-2" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;"> ALL UPCOMING EVENTS</h5>
+      <h5 class="display-2" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;"> POPULAR  EVENTS</h5>
         <br />
         
       
-      <div class="filter">
-        <%= form_tag '#', :method => :get do%>
-        <%= collection_select :category, :id, Category.all, :id, :name, placeholder: "FILTER BY CATEGORY" %>
-        <%= submit_tag 'Filter' %>
-        <% end %>
-      </div>
-    </div>
+      
 
     <div class="row">
 
@@ -39,7 +33,7 @@
             <p class="card-text">
               <%= event.description.truncate(25, separator: /\s/) %>
             </p>
-            <a href="<%= event_path(event) %>" class="card-link">Event Details</a>
+            <a href="<%= event_path(event) %>" class="card-link">EVENT DETAILS</a>
 
           </div>
         </div>
@@ -51,16 +45,7 @@
       <% end %>
 
       <br />
-      <div class="w-100"></div>
-        <div id="events">
-          <%= month_calendar events: @events do |date, events| %>
-            <%= date %>
-            <% events.each do |event| %>
-              <%= event.name %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+      
     </div>
   </div>
 </body>

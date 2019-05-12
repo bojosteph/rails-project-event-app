@@ -72,6 +72,7 @@
         <% if rsvp.participant_id = current_user.id %>
           <a class="btn btn-outline-warning btn-lg btn-block" href="<%= rsvp_events_delete_path(id: @event.id) %>">CANCEL
             RSVP</a>
+            <br />
           <a class="btn btn-outline-info btn-lg btn-block" href="<%= new_event_review_path(@event) %>">REVIEW
             EVENT</a>
             <% @reviews.each do |review| %>
@@ -82,7 +83,7 @@
             <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_event_review_path(@event) %>">EDIT REVIEW</a>
             <br />
 
-            <br />
+        
             <a class="btn btn-outline-warning btn-lg btn-block" href="<%= delete_review_path(id: @event.id) %>">DELETE
               REVIEW</a>
             <br />

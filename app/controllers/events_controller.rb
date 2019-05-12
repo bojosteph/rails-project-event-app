@@ -65,13 +65,13 @@ class EventsController < ApplicationController
     @user = current_user
     @event = Event.find(params[:id])
     @event.destroy
-    flash[:message] = "YOU HAVE DELETED #{@event.name}.upcase"
+    flash[:message] = "YOU HAVE DELETED #{@event.name.upcase}"
     redirect_to events_path(@user)
   end
 
   def past 
     @events = Event.past_event 
-    render :index  
+    render :past  
   end
 
   def active
@@ -91,7 +91,7 @@ class EventsController < ApplicationController
 
  def top 
     @events = Event.top
-    render :index 
+    render :top_rated 
   end
   
   def highest_rated

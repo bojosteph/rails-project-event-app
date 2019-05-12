@@ -1,33 +1,12 @@
 <body id="event_index">
-  <div class="container">
-
-    <div class="row">
-      <div class="col-lg-3">
-        <p> <%= link_to "TODAYS EVENT", todays_events_path %></p>
-      </div>
-      <div class="col-lg-3">
-        <p><%= link_to "PAST EVENTS", past_events_events_path %></p>
-      </div>
-      <div class="col-lg-3">
-        <p><%= link_to "ALL EVENTS", all_events_events_path %></p>
-      </div>
-      <div class="col-lg-3">
-        <p><%= link_to "TOP EVENTS", top_events_events_path %></p>
-      </div>
-    </div>
-
-    <div class="links">
+  <%= render 'top_link' %>
 
       <br><br>
 
 
-      <h3 class="display-2" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;"> All Upcoming
-        Events</h3>
-      <br />
-                                       
-      <br />
-
-      
+      <h5 class="display-2" align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;"> HIGHEST RATED EVENTS</h5>
+        <br />
+        
 
     <div class="row">
 
@@ -52,7 +31,7 @@
             <p class="card-text">
               <%= event.description.truncate(25, separator: /\s/) %>
             </p>
-            <a href="<%= user_event_path(@user, event) %>" class="card-link">Event Details</a>
+            <a href="<%= event_path(event) %>" class="card-link">Event Details</a>
 
           </div>
         </div>
@@ -65,6 +44,6 @@
 
       <br />
       
-  </div>
+    </div>
   </div>
 </body>
