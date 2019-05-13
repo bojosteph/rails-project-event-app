@@ -1,21 +1,23 @@
-RAILS EVENT APP - Rails Portfolio Project for Flatiron School
+<p>RAILS EVENT APP - Rails Portfolio Project for Flatiron School</p>
 <br>
+<p>
 The app allows a registered User can be a Planner to create an  event, edit and delete them, as well as see other Planners's Event.
 A User can also rsvp to others event as Participant . Event Participant's can cancel rsvp .
-As Reviewer a User can rate and comment on an event and also edit and delete review on event they rsvp on . 
-<br>
+As Reviewer a User can rate and comment on an event and also edit and delete review on event they rsvp on . </p>
+<br/>
  Application / Version Information
-<br>
+
+<br/>
 * Ruby version - 2.6.1
-<br>
+<br/>
 * Rails version - 5.2.3
-<br>
+<br/>
 * Database - sqlite3/development &ensp;  postgres/production
-<br>
+<br/>
 * Framework - Ruby on Rails
-<br>
+<br/>
 * Hosted on Heroku
-<br>
+<br/>
  Deployment Instructions
 <br>
 Make sure you have Rails and Git installed on your machine
@@ -36,25 +38,25 @@ Make sure you have Rails and Git installed on your machine
 
 LICENSE:
 <br>
-Permission is hereby granted, free of charge, to any person
+<p>Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
 files (the "Software"), to deal in the Software without
 restriction, including without limitation the rights to use,
 copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the
 Software is furnished to do so, subject to the following
-conditions:
+conditions:</p>
 <br>
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
 <br>
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
 HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+OTHER DEALINGS IN THE SOFTWARE.</p>
 <br>
-LICENSE.md
+<p>LICENSE.md</p>
