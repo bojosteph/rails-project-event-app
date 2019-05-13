@@ -1,7 +1,7 @@
 <p>RAILS EVENT APP - Rails Portfolio Project for Flatiron School</p>
 <br>
 <p>
-The app allows a registered User can be a Planner to create an  event, edit and delete them, as well as see other Planners's Event.
+The app allows a registered User to plan and  create an  event, edit and delete them, as well as see other planners's Event.
 A User can also rsvp to others event as Participant . Event Participant's can cancel rsvp .
 As Reviewer a User can rate and comment on an event and also edit and delete review on event they rsvp on . </p>
 <br/>
