@@ -4,22 +4,22 @@ The app allows a registered User can be a Planner to create an  event, edit and 
 A User can also rsvp to others event as Participant . Event Participant's can cancel rsvp .
 As Reviewer a User can rate and comment on an event and also edit and delete review on event they rsvp on . 
 <br>
-## Application / Version Information
+ Application / Version Information
 <br>
 * Ruby version - 2.6.1
 <br>
 * Rails version - 5.2.3
 <br>
-* Database - sqlite3/development  postgres/production
+* Database - sqlite3/development &ensp;  postgres/production
 <br>
 * Framework - Ruby on Rails
 <br>
 * Hosted on Heroku
 <br>
-## Deployment Instructions
+ Deployment Instructions
 <br>
 Make sure you have Rails and Git installed on your machine
-<br>
+
 1) git clone the repo to your local machine `git clone https://github.com/bojosteph/rails-project-event-app.git`
 
 2) Run `bundle install` to install gems
