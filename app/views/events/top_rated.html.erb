@@ -13,41 +13,7 @@
   <% end %>
 
   <br />
-  <div class="row">
-
-    <% @events.each do |event| %>
-
-    <div class="col-sm" style="padding-bottom: 10px;">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-
-          <h5 class="card-title">
-            <%=event.name.upcase %>
-          </h5>
-          <h6 class="card-subtitle mb-2 text-muted">
-            <%= start_of_event event %>
-          </h6>
-          <h6 class="card-subtitle mb-2 text-muted">
-            <%= end_of_event  event %>
-          </h6>
-          <h6 class="card-subtitle mb-2 text-muted">LOCATION:
-            <%= event.location.upcase %>
-          </h6>
-          <p class="card-text">
-            <%= event.description.truncate(25, separator: /\s/) %>
-          </p>
-          <a href="<%= event_path(event) %>" class="card-link">Event Details</a>
-
-        </div>
-      </div>
-    </div>
-
-    <br />
-    <br />
-
-    <% end %>
-
-    <br />
+  <%= render 'events_cards' %>
 
   </div>
   </div>
