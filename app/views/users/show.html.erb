@@ -7,12 +7,19 @@
     <h6>No. OF PAST EVENTS &nbsp &nbsp : <%= @user.events.past_event.count %></h6>
 
 
-    <div class="row">
+    
 
       <div class="col-lg-3">
         <h5 style="color:#003366" >LIST OF EVENTS :</h5>
         <% @event.each do |event| %>
           <h6 style="color:#003366"> <%= link_to event.name.upcase, event_path(event) %></h6>
+        <% end %>
+      </div>
+
+      <div class="col-lg-3">
+        <h5 style="color:#003366">LIST OF EVENTS YOU RSVP'd:</h5>
+        <% @user.rsvp_events.each do |rsvp| %>
+        <h6 style="color:#003366"> <%= link_to rsvp.attending_event.name.upcase, event_path(rsvp.attending_event.id) %></h6>
         <% end %>
       </div>
 

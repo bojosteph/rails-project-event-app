@@ -26,7 +26,7 @@
   <h5 style="color: #000033">DESCRIPTION:
     <%= @event.description.upcase %>
   </h5>
-  
+
   <h5>EVENT PARTICIPANTS:</h5>
   <% @rsvp_events.each do |rsvp| %>
   <h6 style="color:#2F4F4F">
@@ -52,7 +52,7 @@
       <li>
         REVIEWER :
         <%= review.reviewer.full_name.upcase %>&ensp;
-        
+
         RATING :
         <%= review.rating %>&ensp;
 
@@ -67,43 +67,45 @@
   <br />
   <a class="btn btn-outline-primary btn-lg btn-block" href="<%=events_url %>">ALL UPCOMING EVENTS</a>
   <br />
+  <a class="btn btn-outline-info btn-lg btn-block" href="<%= event_reviews_path(@event) %>">SEE ALL
+    REVIEWS</a>
+  <br />
 
   <% if @event.planner_id != current_user.id  %>
   <div class="rsvp">
     <%= button_to "RSVP NOW", rsvp_events_create_event_path(event_id: @event.id), class: "btn btn-outline-success btn-lg btn-block" %>
-      <br>
-      
-        <% unless @rsvp_event.blank? %>
-        <% if @rsvp_event.participant_id = current_user.id %>
-          <a class="btn btn-outline-warning btn-lg btn-block" href="<%= rsvp_events_delete_path(id: @event.id) %>">CANCEL
-            RSVP</a>
-            <br />
-          <a class="btn btn-outline-info btn-lg btn-block" href="<%= new_event_review_path(@event) %>">REVIEW
-            EVENT</a>
-            
+    <br>
+
+    <% unless @rsvp_event.blank? %>
+    <% if @rsvp_event.participant_id = current_user.id %>
+    <a class="btn btn-outline-warning btn-lg btn-block" href="<%= rsvp_events_delete_path(id: @event.id) %>">CANCEL
+      RSVP</a>
+    <br />
+    <a class="btn btn-outline-info btn-lg btn-block" href="<%= new_event_review_path(@event) %>">REVIEW
+      EVENT</a>
+
+    <br />
+    <% unless @review.blank? %>
+    <% if @review.reviewer_id = current_user.id %>
+
+    <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_event_review_path(@event) %>">EDIT REVIEW</a>
+    <br />
 
 
-            <br />
-            <% unless @review.blank? %>
-            <% if @review.reviewer_id = current_user.id %>
-            <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_event_review_path(@event) %>">EDIT REVIEW</a>
-            <br />
+    <a class="btn btn-outline-warning btn-lg btn-block" href="<%= delete_review_path(id: @event.id) %>">DELETE
+      REVIEW</a>
+    <br />
+    <br />
 
-        
-            <a class="btn btn-outline-warning btn-lg btn-block" href="<%= delete_review_path(id: @event.id) %>">DELETE
-              REVIEW</a>
-            <br />
-            <br />
-
-            <br />
-          </div>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
+    <br />
+  </div>
   <% end %>
-   
-  
+  <% end %>
+  <% end %>
+  <% end %>
+  <% end %>
+
+
 
   <% if @event.planner_id == @user.id %>
   <a class="btn btn-outline-info btn-lg btn-block" href="<%= edit_event_path(@event) %>">EDIT EVENT</a>

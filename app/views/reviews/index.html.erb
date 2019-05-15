@@ -1,7 +1,28 @@
-<h1>Reviews#index</h1>
-<p>Find me in app/views/reviews/index.html.erb</p>
+<%= render '/events/top_link' %>
+
+<br><br>
+
+
+<h2 align="center" style="padding-top: 10Ppx; color:black;  padding-bottom: 10px;"> ALL REVIEWS FOR <%=@event.name.upcase%> EVENTS</h2>
+<br />
+
 
 <% @reviews.each do |review| %>
-<%= review.rating%>
-<%= review.body %>
+<h6 style="color:#2F4F4F">
+
+
+  <ul>
+    <li>
+      REVIEWER :
+      <%= review.reviewer.full_name.upcase %>&ensp;
+
+      RATING :
+      <%= review.rating %>&ensp;
+
+      REVIEW :
+      <%= review.body.upcase %>
+    </li>
+
+  </ul>
+</h6>
 <% end %>
