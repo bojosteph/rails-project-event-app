@@ -4,6 +4,7 @@ class ReviewsController < ApplicationController
 
   def index
     # raise params.inspect
+    @user = current_user
     @event = Event.find_by(id: params[:event_id])
     @reviews = Review.where(reviewing_event_id: @event.id)
   end

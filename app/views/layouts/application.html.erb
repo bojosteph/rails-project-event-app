@@ -21,7 +21,7 @@
   <body>
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">Rails Event App</a>
+      <a class="navbar-brand" href="/">RAILS EVENT APP</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navBarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,25 +32,25 @@
 
           <li class="nav-item active">
             <% @user = current_user %>
-            <a class="nav-link" href="<%= events_path(@user) %>">Upcoming Events</a>
+            <a class="nav-link" href="<%= events_path(@user) %>">UPCOMING EVENTS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/users/<%= @user.id %>">Your Events</a>
+            <a class="nav-link" href="/users/<%= @user.id %>">YOUR EVENTS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%= new_event_path(@user)%>">Create Events</a>
+            <a class="nav-link" href="<%= new_event_path(@user)%>">CREATE EVENTS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/signout">Log Out</a>
+            <a class="nav-link" href="/signout">LOG OUT</a>
           </li>
 
           <% end %>
           <% if !user_signed_in? %>
           <li class="nav-item">
-            <a class="nav-link" href="/signin">Log In</a>
+            <a class="nav-link" href="/signin">LOG IN </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/signup">Sign Up</a>
+            <a class="nav-link" href="/signup">SIGN UP</a>
           </li>
           <% end %>
         </ul>

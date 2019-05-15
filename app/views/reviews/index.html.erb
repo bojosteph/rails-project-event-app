@@ -14,7 +14,7 @@
   <ul>
     <li>
       REVIEWER :
-      <%= review.reviewer.full_name.upcase %>&ensp;
+      <%= link_to review.reviewer.full_name.upcase, user_path(review.reviewer.id) %>&ensp;
 
       RATING :
       <%= review.rating %>&ensp;
