@@ -40,7 +40,7 @@ class RsvpEventsController < ApplicationController
       else
 
         rsvp.participant == @user
-        rsvp.delete
+        rsvp.destroy
         flash[:message] = "YOU CANCELLED YOUR RSVP FOR  #{@event.name.upcase}."
         redirect_to event_path(@event)
       end

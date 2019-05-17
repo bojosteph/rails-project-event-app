@@ -47,7 +47,7 @@ class ReviewsController < ApplicationController
         redirect_to events_path(@event), alert: 'YOU CAN ONLY CANCEL YOUR REVIEW '
       else
         review.reviewer == @user
-        review.delete
+        review.destroy
         flash[:message] = "YOU CANCELLED YOUR REVIEW FOR #{@event.name}."
         redirect_to event_path(@event)
       end

@@ -1,11 +1,16 @@
 
+
 class EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_time_zone, if: :user_signed_in?
 
   def index
     @user = current_user
-    if params[:category]
+
+    if params[:search]
+      params[:search].downcase!
+      @events = Event.where('name LIKE ?', "%#{params[:search]}%")
+    elsif params[:category]
       @category = Category.find_by(id: params[:category][:id])
       @events = @category.events
     else
@@ -20,11 +25,11 @@ class EventsController < ApplicationController
     @rsvp_event = RsvpEvent.find_by(participant_id: @user.id, attending_event_id: @event.id)
     @review = Review.find_by(reviewer_id: @user.id, reviewing_event_id: @event.id)
     @rsvp_events = RsvpEvent.where(attending_event_id: @event.id)
-    @reviews = Review.where(reviewing_event_id: @event.id) 
+    @reviews = Review.where(reviewing_event_id: @event.id)
   end
 
   def new
-    #@user = current_user
+    # @user = current_user
     @event = Event.new
     @event.build_category
   end
@@ -32,7 +37,7 @@ class EventsController < ApplicationController
   def create
     # raise params.inspect
     @user = current_user
-    @event = @user.events.build(event_params(:name, :location, :description, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
+    @event = @user.events.build(event_params(:name, :location, :description, :search, :planner_id, :start_date, :end_date, :category_id, category_attributes: [:name]))
 
     if @event.save
       flash[:message] = "YOU HAVE CREATED #{@event.name.upcase}"
@@ -45,7 +50,7 @@ class EventsController < ApplicationController
 
   def edit
     # raise params.inspect
-    #@user = current_user
+    # @user = current_user
     @event = Event.find(params[:id])
     @event.build_category
   end
@@ -71,9 +76,9 @@ class EventsController < ApplicationController
     redirect_to events_path(@user)
   end
 
-  def past 
-    @events = Event.past_event 
-    render :past  
+  def past
+    @events = Event.past_event
+    render :past
   end
 
   def active
@@ -86,22 +91,20 @@ class EventsController < ApplicationController
     render :index
   end
 
-  def all 
+  def all
     @events = Event.all
-    render :all 
+    render :all
   end
 
- def top 
+  def top
     @events = Event.top
-    render :top_rated 
-  end
-  
+    render :top_rated
+   end
+
   def highest_rated
     @events = Event.highest_rated
     render :event_ratings
   end
-
-    
 
   private
 

@@ -89,6 +89,8 @@ class Event < ApplicationRecord
     self if present?
   end
 
+  
+
 
   def category_attributes=(category_attributes)
     build_category(category_attributes) unless category_attributes[:name].blank?
